@@ -8,13 +8,13 @@ class UserRepository extends DbRepository
 		$now = new DateTime();
 
 		$sql = "
-			INSERT INTO user(user_name,password,created_at) VALUES(:username,:password,:created_at)
+			INSERT INTO user(user_name,password,created_at) VALUES(:user_name, :password, :created_at)
 			";
 
 		$stmt = $this->execute($sql,array(
 			':user_name' => $user_name,
 			':password' => $password,
-			'created_at' => $now->format('Y-m-d H:i:s'),
+			':created_at' => $now->format('Y-m-d H:i:s'),
 		));
 	}
 
@@ -24,13 +24,6 @@ class UserRepository extends DbRepository
 	}
 
 	public function fetchByUserName($user_name)
-	{
-		$sql = "SELECT * FROM user WHERE user_name = :user_name";
-
-		return $this->fetch($sql,array(':user_name' => $user_name));
-	}
-
-	public function isUniqueUserName($user_name)
 	{
 		$sql = "SELECT COUNT(id) as count FROM user WHERE user_name = :user_name";
 
