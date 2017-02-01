@@ -43,8 +43,7 @@ class StatusController extends Controller
 		}
 
 		$user = $this->session->get('user');
-		$statuses = $this->db_manager->get('Status')
-			->fetchAllPersonalArchivesByUserId($user['id']);
+		$statuses = $this->db_manager->get('Status')->fetchAllPersonalArchivesByUserId($user['id']);
 
 		return $this->render(array(
 			'errors' => $errors,
