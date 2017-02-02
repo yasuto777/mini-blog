@@ -43,7 +43,7 @@ class AccountController extends Controller
 
 		if (count($errors) === 0){
 			$this->db_manager->get('User')->insert($user_name,$password);
-			$this->session->Authenticated(true);
+			$this->session->setAuthenticated(true);
 
 			$user = $this->db_manager->get('User')->fetchByUserName($user_name);
 			$this->session->set('user',$user);
