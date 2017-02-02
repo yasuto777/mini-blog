@@ -55,7 +55,7 @@ class AccountController extends Controller
 			'user_name' => $user_name,
 			'password' => $password,
 			'errors' => $errors,
-			'_token' => $this->CsrfToken('account/signup'),
+			'_token' => $this->generateCsrfToken('account/signup'),
 		),'signup');
 	}
 
