@@ -91,7 +91,7 @@ class AccountController extends Controller
 
 		$token = $this->request->getPost('_token');
 		if (!$this->checkCsrfToken('account/signin',$token)){
-			return $this->redirect('account/signin');
+			return $this->redirect('/account/signin');
 		}
 
 		$user_name = $this->request->getPost('user_name');
@@ -126,7 +126,7 @@ class AccountController extends Controller
 		return $this->render(array(
 			'user_name' => $user_name,
 			'password' => $password,
-			'error' => $errors,
+			'errors' => $errors,
 			'_token' => $this->generateCsrfToken('account/signin'),
 		),'signin');
 	}
