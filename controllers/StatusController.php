@@ -4,6 +4,12 @@ class StatusController extends Controller
 {
 	public function indexAction()
 	{
+		// Original Code
+		// When visit top page,if you don't authenticated,redirect to the Signin page.
+		if (!$this->session->isAuthenticated()){
+			return $this->redirect('/account/signin');
+		}
+		// Original code end
 		$user = $this->session->get('user');
 		$statuses = $this->db_manager->get('Status')->fetchAllPersonalArchivesByUserId($user['id']);
 
@@ -13,6 +19,17 @@ class StatusController extends Controller
 			'_token' => $this->generateCsrfToken('status/post'),
 		));
 	}
+	#public function indexAction()
+	#{
+	#	$user = $this->session->get('user');
+	#	$statuses = $this->db_manager->get('Status')->fetchAllPersonalArchivesByUserId($user['id']);
+
+	#	return $this->render(array(
+	#		'statuses' => $statuses,
+	#		'body' => '',
+	#		'_token' => $this->generateCsrfToken('status/post'),
+	#	));
+	#}
 
 	public function postAction()
 	{
