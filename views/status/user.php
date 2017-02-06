@@ -11,7 +11,7 @@
 	<input type="hidden" name="following_name" value="<?php echo 
 	$this->escape($user['user_name'])?>" />
 
-	<input type="submit" value="フォr-する" />
+	<input type="submit" value="フォロ-する" />
 </form>
 <?php endif; ?>
 <?php endif; ?>
