@@ -7,7 +7,7 @@
 <p>フォローしています</p>
 <?php else: ?>
 <form action="<?php echo $base_url; ?>/follow" method="post">
-	<input type="hidden" name="_token" value="<?php echo $this->escape($_toekn); ?>" />
+	<input type="hidden" name="_token" value="<?php echo $this->escape($_token); ?>" />
 	<input type="hidden" name="following_name" value="<?php echo 
 	$this->escape($user['user_name'])?>" />
 
