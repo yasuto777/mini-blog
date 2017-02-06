@@ -75,7 +75,7 @@ class StatusController extends Controller
 	public function userAction($params)
 	{
 		// getメソッドでユーザーを取得して、DB上のユーザー名と照合、結果を返してる
-		$user = $this->db_manager->get('User')->fetchAllByUser($params['user_name']);
+		$user = $this->db_manager->get('User')->fetchByUserName($params['user_name']);
 		if (!$user) {
 			$this->forward404();
 		}
@@ -92,7 +92,7 @@ class StatusController extends Controller
 
 		return $this->render(array(
 			'user' => $user,
-			'status' => $statuses,
+			'statuses' => $statuses,
 			'following' => $following,
 			'_token' => $this->generateCsrfToken('account/follo'),
 		));
