@@ -32,7 +32,7 @@ class UserRepository extends DbRepository
 
 	public function isUniqueUserName($user_name)
 	{
-		$sql = "select count(id) as count from user where user_name = :user_name";
+		$sql = "SELECT COUNT(id) as count FROM user WHERE user_name = :user_name";
 
 		$row = $this->fetch($sql,array(':user_name' => $user_name));
 		if ($row['count'] === '0'){
@@ -40,5 +40,17 @@ class UserRepository extends DbRepository
 		}
 
 		return false;
+	}
+
+	public function fetchAllFollowingsByUserId($user_id)
+	{
+		$sql = "
+			SELECT u.*
+			FROM u
+				LEFT JOIN following f on f.following_id = u.id
+			WHERE f.user_id = :user_id
+			";
+
+		return $this->fetchAll($sql,array(':user_id' => $user_id));
 	}
 }
