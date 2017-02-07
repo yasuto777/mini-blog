@@ -162,7 +162,7 @@ class AccountController extends Controller
 		}
 
 		$follow_user = $this->db_manager->get('User')->fetchByUserName($following_name);
-		if (!following_user){
+		if (!$follow_user){
 			$this->forward404();
 		}
 
