@@ -46,7 +46,7 @@ class UserRepository extends DbRepository
 	{
 		$sql = "
 			SELECT u.*
-			FROM u
+			FROM user u
 				LEFT JOIN following f on f.following_id = u.id
 			WHERE f.user_id = :user_id
 			";
