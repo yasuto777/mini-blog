@@ -94,7 +94,7 @@ class StatusController extends Controller
 			'user' => $user,
 			'statuses' => $statuses,
 			'following' => $following,
-			'_token' => $this->generateCsrfToken('account/follo'),
+			'_token' => $this->generateCsrfToken('account/follow'),
 		));
 
 	}
