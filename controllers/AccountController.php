@@ -157,7 +157,7 @@ class AccountController extends Controller
 		}
 
 		$token = $this->request->getPost('_token');
-		if (!$this->checkCsrfToken('account/following',$token)){
+		if (!$this->checkCsrfToken('account/follow',$token)){
 			return $this->redirect('/user/'. $following_name);
 		}
 
