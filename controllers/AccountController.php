@@ -169,7 +169,8 @@ class AccountController extends Controller
 		$user = $this->session->get('user');
 
 		$following_repository = $this->db_manager->get('Following');
-		if ($user['id'] !== $follow_user['id'] && !$following_repository->isFollowing($user['id'],$follow_user['id'])
+		if ($user['id'] !== $follow_user['id']
+			&& !$following_repository->isFollowing($user['id'],$follow_user['id'])
 		){
 			$following_repository->insert($user['id'],$follow_user['id']);
 		}
