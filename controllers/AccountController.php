@@ -181,7 +181,7 @@ class AccountController extends Controller
 	public function updateAction()
 	{
 		return $this->render(array(
-			'user_name' => $this->request->getPost('user_name'),
+			'user_name' => $this->session->get('user'),
 			'_token' => $this->generateCsrfToken('account/update'),
 		));
 	}
@@ -195,10 +195,10 @@ class AccountController extends Controller
 		$token = $this->request->getPost('_token');
 
 		if (!$this->checkCsrfToken('account/update',$token)){
-			return $this->redirect('account/update');
+			return $this->redirect('/account/update');
 		}
 
-		$user_name = $this->request->getPost('user_name');
+		$user_name = $this->session->get('user_name');
 		$password = $this->request->getPost('password');
 		$new_password = $this->request->getPost('new_password');
 		$check_new_password = $this->request->getPost('check_new_password');
