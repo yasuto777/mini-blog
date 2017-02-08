@@ -177,4 +177,11 @@ class AccountController extends Controller
 
 		return $this->redirect('/account');
 	}
+
+	public function updateAction()
+	{
+		return $this->render(array(
+			'_token' => $this->generateCsrfToken('account/update'),
+		));
+	}
 }
