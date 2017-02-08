@@ -16,6 +16,9 @@
 	<li>
 		<a href="<?php echo $base_url; ?>/account/signout">ログアウト</a>
 	</li>
+	<li>
+		<a href="<?php echo $base_url; ?>/account/update">パスワードの変更</a>
+	</li>
 </ul>
 
 <h3>フォロー中</h3>
