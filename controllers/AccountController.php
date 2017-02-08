@@ -184,4 +184,51 @@ class AccountController extends Controller
 			'_token' => $this->generateCsrfToken('account/update'),
 		));
 	}
+
+	public function changepassAction()
+	{
+		if (!$this->request->isPost()){
+			$this->forward404();
+		}
+
+		$token = $this->request->getPost('_token');
+
+		if (!$this->checkCsrfToken('account/update',$token)){
+			return $this->redirect('account/update');
+		}
+
+		$user_name = $this->request->getPost('user_name');
+		$password = $this->request->getPost('password');
+		$new_password = $this->request->getPost('new_password');
+		$check_new_password = $this->request->getPost('check_new_password');
+
+		$errors = array();
+
+		if ($new_password !== $check_new_password){
+			$errors[] = '入力が正しくありません';
+		} else if (!strlen($password)){
+			$errors[] = 'パスワードを入力してください';
+		} else if (!strlen($new_password) || !strlen($check_new_password)){
+			$errors[] = '新しいパスワードを入力してください';
+		} else if (strlen($new_password) < 4 || 30 > strlen($new_password)){
+			$errors[] = 'パスワードは4～30文字で入力してください';
+		}
+
+		if (count($errors) === 0){
+			$user_repository = $this->dbmanager->get('User');
+			$user = $user_repository->fetchByUserName($user_name);
+
+			if ($user['password'] !== $user_repository->hashPassword($password)){
+				$errors[] = '入力が正しくありません';
+			} else {
+				// パスワードの上書き処理
+				return $this->redirect('/');
+			}
+		}
+
+		return $this->render(array(
+			'errors' => $errors,
+			'_token' => $this->generateCsrfToken('account/update'),
+		),'update');
+	}
 }
