@@ -181,6 +181,7 @@ class AccountController extends Controller
 	public function updateAction()
 	{
 		return $this->render(array(
+			'user_name' => $this->request->getPost('user_name'),
 			'_token' => $this->generateCsrfToken('account/update'),
 		));
 	}
