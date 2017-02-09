@@ -181,13 +181,15 @@ class AccountController extends Controller
 	public function updateAction()
 	{
 		return $this->render(array(
-			'user_name' => $this->session->get('user'),
+			'user' => $this->session->get('user'),
 			'_token' => $this->generateCsrfToken('account/update'),
 		));
 	}
 
 	public function changepassAction()
 	{
+		$user = $this->session->get('user');
+		var_dump($user);
 		if (!$this->request->isPost()){
 			$this->forward404();
 		}
@@ -198,7 +200,6 @@ class AccountController extends Controller
 			return $this->redirect('/account/update');
 		}
 
-		$user_name = $this->session->get('user_name');
 		$password = $this->request->getPost('password');
 		$new_password = $this->request->getPost('new_password');
 		$check_new_password = $this->request->getPost('check_new_password');
@@ -206,7 +207,8 @@ class AccountController extends Controller
 		$errors = array();
 
 		if ($new_password !== $check_new_password){
-			$errors[] = '入力が正しくありません';
+			#$errors[] = '入力が正しくありません';
+			$errors[] = '確認用パスワードと一致しません';
 		} else if (!strlen($password)){
 			$errors[] = 'パスワードを入力してください';
 		} else if (!strlen($new_password) || !strlen($check_new_password)){
@@ -217,15 +219,14 @@ class AccountController extends Controller
 
 		if (count($errors) === 0){
 			$user_repository = $this->db_manager->get('User');
-			$user = $user_repository->fetchByUserName($user_name);
 
 			if ($user['password'] !== $user_repository->hashPassword($password)){
-				$errors[] = '入力が正しくありません';
+				#$errors[] = '入力が正しくありません';
+				$errors[] = 'パスワードが一致しません';
 			} else {
 				// パスワードの上書き処理
-				echo 'Rewrite password...';
-				sleep(2);
-				return $this->redirect('/');
+				#var_dump($password,$new_password,$check_new_password);
+				#return $this->redirect('/');
 			}
 		}
 

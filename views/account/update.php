@@ -3,7 +3,7 @@
 <?php $this->setLayoutVar('title','パスワードの変更'); ?>
 
 <h2>パスワードの変更</h2>
-	ユーザーID：
+	ユーザーID：<strong><?php echo $user['user_name']; ?></strong>
 
 	<form action="<?php echo $base_url; ?>/account/changepass" method="post">
 		<input type="hidden" name="_token" value="<?php echo $this->escape($_token); ?>" />
