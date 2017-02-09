@@ -26,6 +26,7 @@ class AccountController extends Controller
 
 		$user_name = $this->request->getPost('user_name');
 		$password = $this->request->getPost('password');
+		$check_password = $this->request->getPost('check_password');
 
 		$errors = array();
 
@@ -41,6 +42,8 @@ class AccountController extends Controller
 			$errors[] = 'パスワードを入力してください';
 		} else if (4 > strlen($password) || strlen($password) > 30){
 			$errors[] = 'パスワードは4～30文字以内で入力してください';
+		} else if ($password !== $check_password){
+			$errors[] = 'パスワードが一致しません';
 		}
 
 		if (count($errors) === 0){

@@ -12,6 +12,7 @@
 <?php echo $this->render('account/inputs',array(
 	'user_name' => $user_name, 'password' => $password,
 )); ?>
+<strong>パスワード(確認)</strong><input type="password" name="check_password" />
 
 	<p>
 		<input type="submit" value="登録" />
