@@ -211,18 +211,20 @@ class AccountController extends Controller
 			$errors[] = 'パスワードを入力してください';
 		} else if (!strlen($new_password) || !strlen($check_new_password)){
 			$errors[] = '新しいパスワードを入力してください';
-		} else if (strlen($new_password) < 4 || 30 > strlen($new_password)){
+		} else if (strlen($new_password) < 4 || 30 < strlen($new_password)){
 			$errors[] = 'パスワードは4～30文字で入力してください';
 		}
 
 		if (count($errors) === 0){
-			$user_repository = $this->dbmanager->get('User');
+			$user_repository = $this->db_manager->get('User');
 			$user = $user_repository->fetchByUserName($user_name);
 
 			if ($user['password'] !== $user_repository->hashPassword($password)){
 				$errors[] = '入力が正しくありません';
 			} else {
 				// パスワードの上書き処理
+				echo 'Rewrite password...';
+				sleep(2);
 				return $this->redirect('/');
 			}
 		}
