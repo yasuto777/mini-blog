@@ -225,6 +225,7 @@ class AccountController extends Controller
 			} else {
 				// パスワードの上書き処理
 				#var_dump($password,$new_password,$check_new_password);
+				$this->db_manager->get('User')->update($user['user_name'],$new_password);
 				return $this->redirect('/');
 			}
 		}
