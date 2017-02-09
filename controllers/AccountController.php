@@ -178,6 +178,7 @@ class AccountController extends Controller
 		return $this->redirect('/account');
 	}
 
+	/* Author Souma */
 	public function updateAction()
 	{
 		return $this->render(array(
@@ -206,8 +207,7 @@ class AccountController extends Controller
 		$errors = array();
 
 		if ($new_password !== $check_new_password){
-			#$errors[] = '入力が正しくありません';
-			$errors[] = '確認用パスワードと一致しません';
+			$errors[] = '入力が正しくありません';
 		} else if (!strlen($password)){
 			$errors[] = 'パスワードを入力してください';
 		} else if (!strlen($new_password) || !strlen($check_new_password)){
@@ -220,11 +220,9 @@ class AccountController extends Controller
 			$user_repository = $this->db_manager->get('User');
 
 			if ($user['password'] !== $user_repository->hashPassword($password)){
-				#$errors[] = '入力が正しくありません';
-				$errors[] = 'パスワードが一致しません';
+				$errors[] = '入力が正しくありません';
 			} else {
 				// パスワードの上書き処理
-				#var_dump($password,$new_password,$check_new_password);
 				$this->db_manager->get('User')->update($user['user_name'],$new_password);
 				return $this->redirect('/');
 			}
