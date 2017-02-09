@@ -189,7 +189,6 @@ class AccountController extends Controller
 	public function changepassAction()
 	{
 		$user = $this->session->get('user');
-		var_dump($user);
 		if (!$this->request->isPost()){
 			$this->forward404();
 		}
@@ -226,7 +225,7 @@ class AccountController extends Controller
 			} else {
 				// パスワードの上書き処理
 				#var_dump($password,$new_password,$check_new_password);
-				#return $this->redirect('/');
+				return $this->redirect('/');
 			}
 		}
 
